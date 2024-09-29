@@ -42,3 +42,20 @@ console.log(sumZero2([-4, -3, -2, -1, 0, 1, 2, 5])); //This function uses the tw
 //If the sum of the two numbers is zero, the function returns that pair.
 //If the sum is positive, the right pointer moves left (to decrease the sum).
 //If the sum is negative, the left pointer moves right (to increase the sum).
+
+//QUESTION-2
+
+//Implement a function called countUniqueValues, which accepts a sorted array, and
+//counts the unique values in the array. There can be negative numbers in the array,
+// but it will always be sorted.
+
+// approach-1 (time complexity- O(n), space complexity- O(n))
+const count = (arr) => {
+  let obj = {}; // O(n)
+  for (let el of arr) {
+    // O(n)
+    obj[el] = true; // Only care about existence, not count
+  }
+  return Object.keys(obj).length; // Number of unique values
+};
+console.log(count([1, 1, 1, 1, 2, 2, 3, 4, 5, 5]));
