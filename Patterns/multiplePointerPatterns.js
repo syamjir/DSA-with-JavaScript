@@ -59,3 +59,34 @@ const count = (arr) => {
   return Object.keys(obj).length; // Number of unique values
 };
 console.log(count([1, 1, 1, 1, 2, 2, 3, 4, 5, 5]));
+
+//approach-2 (space-O(1), time-O(n))
+
+function countUniqueValues(arr) {
+  // Handle edge case for empty array
+  if (arr.length === 0) return 0;
+
+  let pointer1 = 0; // Pointer for the unique position
+  let pointer2 = 1; // Pointer to explore the array
+
+  while (pointer2 < arr.length) {
+    // If the current value at pointer1 is equal to pointer2
+    if (arr[pointer1] === arr[pointer2]) {
+      // Move pointer2 to the next element
+      pointer2 += 1;
+    } else {
+      // We found a new unique value
+      pointer1 += 1; // Move pointer1 to the next unique position
+      arr[pointer1] = arr[pointer2]; // Update the value at pointer1
+      pointer2 += 1; // Move pointer2 to the next element
+    }
+  }
+  return pointer1 + 1; // Return the count of unique values
+}
+
+// Example usage
+console.log(countUniqueValues([1, 1, 1, 1, 2, 2, 3, 4, 5, 5])); // Output: 5
+console.log(countUniqueValues([])); // Output: 0
+console.log(countUniqueValues([1])); // Output: 1
+console.log(countUniqueValues([1, 1, 1, 1])); // Output: 1
+console.log(countUniqueValues([1, 2, 3, 4, 5])); // Output: 5
