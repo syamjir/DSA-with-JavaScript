@@ -1,7 +1,7 @@
 //QUESTION-1
 
 //Write a function called sumZero which accept a sorted array of integers.The function should find the first pair
-//were the sum is zero.Return an array that includesboth values that sum to zero
+//were the sum is zero.Return an array that includes both values that sum to zero
 //or undefined if a pair does not exist
 
 //approach-1 (O(n^2))
