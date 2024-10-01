@@ -5,7 +5,7 @@
 
 //approach-1 (O(n^2))
 
-function maxSubarraySum(arr, num) {
+function maxSubArraySum1(arr, num) {
   // Edge case: if the number of elements (num) is greater than the length of the array, return null
   if (num > arr.length) {
     return null;
@@ -29,4 +29,30 @@ function maxSubarraySum(arr, num) {
   }
 
   return max; // Return the maximum sum found
+}
+
+// approach-2 (O(n))  Sliding window[slide sub array]
+
+function maxSubArraySum2(arr, n) {
+  if (arr.length < n) {
+    return null; // If the array length is smaller than the subarray size
+  }
+
+  let tempSum = 0;
+  let maxSum = 0;
+
+  // Sum the first 'n' elements
+  for (let i = 0; i < n; i++) {
+    tempSum += arr[i];
+  }
+
+  maxSum = tempSum;
+
+  // Sliding window: adjust the sum by subtracting the previous element and adding the new one
+  for (let i = n; i < arr.length; i++) {
+    tempSum = tempSum - arr[i - n] + arr[i]; // Slide the window
+    maxSum = Math.max(maxSum, tempSum);
+  }
+
+  return maxSum;
 }
