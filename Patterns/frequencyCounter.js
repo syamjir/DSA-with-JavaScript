@@ -122,3 +122,33 @@ function validAnagram2(first, second) {
 // {a: 0, n: 0, g: 0, r: 0, m: 0,s:1}
 validAnagram2("anagrams", "nagaramm"); //Only 2 for loops: One for creating a frequency map (lookup) and another for decrementing it based on the second string.
 //Time complexity: Since there are two loops, both running in O(n), the total time complexity is O(n) rather than O(n^2).
+
+//EXAMPLE-3
+
+//Write a function called sameFrequency. Given two positive integers,
+// find out if the two numbers have the same frequency of digits.
+
+//approach-1 (O(n))
+
+function sameFrequency(num11, num22) {
+  const num1 = String(num11);
+  const num2 = String(num22);
+  if (num1.length !== num2.length) return false;
+
+  let obj1 = {};
+  let obj2 = {};
+
+  for (let num of num1) {
+    obj1[num] = obj1[num] ? obj1[num] + 1 : 1;
+  }
+  for (let num of num2) {
+    obj2[num] = (obj2[num] || 0) + 1;
+  }
+  for (let key in obj1) {
+    if (obj1[key] !== obj2[key]) {
+      return false;
+    }
+  }
+
+  return true;
+}
