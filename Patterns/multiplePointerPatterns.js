@@ -90,3 +90,38 @@ console.log(countUniqueValues([])); // Output: 0
 console.log(countUniqueValues([1])); // Output: 1
 console.log(countUniqueValues([1, 1, 1, 1])); // Output: 1
 console.log(countUniqueValues([1, 2, 3, 4, 5])); // Output: 5
+
+//QUESTION-3
+
+//Implement a function called, areThereDuplicates which accepts a variable
+//number of arguments, and checks whether there are any duplicates among the arguments passed in.
+
+//approach-1 (O(nlogn))
+
+function areThereDuplicates(...args) {
+  // Sorting the arguments
+  args.sort((a, b) => a - b); // O(n log n) complexity due to sorting
+
+  let start = 0;
+  let next = 1;
+
+  // Checking consecutive elements after sorting
+  while (next < args.length) {
+    // O(n) complexity due to the loop
+    if (args[start] === args[next]) {
+      return true; // Duplicate found
+    }
+    start++;
+    next++;
+  }
+  return false; // No duplicates found
+}
+
+console.log(areThereDuplicates(1, 2, 3, 4, 2)); // true
+console.log(areThereDuplicates(1, 2, 3, 4)); // false
+
+//Time complexity
+
+//Sorting: O(n log n)
+//Checking duplicates: O(n)
+//Overall: O(n log n)
