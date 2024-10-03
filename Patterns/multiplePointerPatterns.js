@@ -125,3 +125,50 @@ console.log(areThereDuplicates(1, 2, 3, 4)); // false
 //Sorting: O(n log n)
 //Checking duplicates: O(n)
 //Overall: O(n log n)
+
+//QUESTION-3
+
+//Write a function called averagePair. Given a sorted array of integers and a
+//target average, determine if there is a pair of values in the array where the
+// average of the pair equals the target average. There may be more than one pair
+// that matches the average target.
+
+//approach-1 (O(n))
+
+function averagePair(arr, avg) {
+  // Calculate the sum that would result in the given average
+  const avgSum = avg * 2;
+  let left = 0;
+  let right = arr.length - 1;
+
+  // Loop through the array with two pointers
+  while (left < right) {
+    const sum = arr[left] + arr[right];
+
+    // If the sum is greater, move the right pointer to reduce the sum
+    if (sum > avgSum) {
+      right--;
+    }
+    // If the sum is smaller, move the left pointer to increase the sum
+    else if (sum < avgSum) {
+      left++;
+    }
+    // If the sum matches the target average, return true
+    else {
+      return true;
+    }
+  }
+
+  // No valid pair found, return false
+  return false;
+}
+
+// Example test cases
+console.log(averagePair([1, 2, 3], 2.5)); // true (2 + 3 = 5, avg = 2.5)
+console.log(averagePair([1, 2, 3, 4, 5], 3.5)); // true (3 + 4 = 7, avg = 3.5)
+console.log(averagePair([1, 3, 5, 7], 4)); // false
+console.log(averagePair([], 4)); // false (empty array)
+
+//Time Complexity:
+// The time complexity of this algorithm is O(n) because the two pointers
+// traverse the array at most once.
