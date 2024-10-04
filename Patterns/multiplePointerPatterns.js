@@ -172,3 +172,43 @@ console.log(averagePair([], 4)); // false (empty array)
 //Time Complexity:
 // The time complexity of this algorithm is O(n) because the two pointers
 // traverse the array at most once.
+
+//QUESTION-4
+
+//Write a function called isSubsequence which takes in two strings and checks
+//whether the characters in the first string form a subsequence of the characters
+// in the second string. In other words, the function should check whether the
+//characters in the first string appear somewhere in the second string, without
+// their order changing.
+
+//approach-1
+
+function isSubsequence(str1, str2) {
+  let i = 0; // Pointer for str1 (subsequence)
+  let j = 0; // Pointer for str2 (main string)
+
+  // Loop through str2 to find the characters of str1
+  while (j < str2.length) {
+    // If characters match, move the pointer for str1
+    if (str1[i] === str2[j]) {
+      i++;
+    }
+    // Move the pointer for str2
+    j++;
+
+    // If we have matched all characters in str1, return true
+    if (i === str1.length) {
+      return true;
+    }
+  }
+
+  // If we complete the loop and haven't matched all of str1, return false
+  return false;
+}
+
+// Example test cases
+console.log(isSubsequence("abc", "aebdc")); // true (characters "a", "b", and "c" appear in order)
+console.log(isSubsequence("abc", "acb")); // false ("b" does not appear after "a" in order)
+console.log(isSubsequence("hello", "heollwrld")); // false ("o" comes before "l" in the wrong order)
+console.log(isSubsequence("sing", "sting")); // true (characters "s", "i", "n", and "g" appear in order)
+console.log(isSubsequence("abc", "def")); // false (characters "a", "b", "c" do not exist in "def")
