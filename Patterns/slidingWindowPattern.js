@@ -1,4 +1,4 @@
-//QUESTION
+//QUESTION-1
 
 //Write a function called maxSubArraySum which accept an array of integers and number called navigator. The function
 //shoud calculate the maximum sum of n consecutive elements in that array
@@ -55,4 +55,36 @@ function maxSubArraySum2(arr, n) {
   }
 
   return maxSum;
+}
+
+//QUESTION-2
+
+//Write a function called minSubArrayLen which accepts two parameters -
+//an array of positive integers and a positive integer.This function should
+//return the minimal length of a contiguous subarray of which the sum is greater
+//than or equal to the integer passed to the function. If there isn't one, return
+// 0 instead.
+
+//approach-1 (O(n))
+
+function minSubArrayLen(nums, sum) {
+  let total = 0;
+  let start = 0;
+  let end = 0;
+  let minLength = Infinity;
+
+  while (end < nums.length) {
+    // Add the current element to the total
+    total += nums[end];
+    end++;
+
+    // Shrink the window as small as possible while the sum is still >= sum
+    while (total >= sum) {
+      minLength = Math.min(minLength, end - start);
+      total -= nums[start];
+      start++;
+    }
+  }
+
+  return minLength === Infinity ? 0 : minLength;
 }
