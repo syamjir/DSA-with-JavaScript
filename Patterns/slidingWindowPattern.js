@@ -152,3 +152,42 @@ function countGoodSubstrings(s) {
 // Example usage:
 console.log(countGoodSubstrings("xyzzaz")); // Output: 1
 console.log(countGoodSubstrings("aababcabc")); // Output: 4
+
+//QUETION-5
+
+//You are given a digit string s that consists of digits from 0 to 9.
+//A string is called semi-repetitive if there is at most one adjacent pair of the
+//same digit. For example, "0010", "002020", "0123", "2002", and "54944" are
+//semi-repetitive while the following are not: "00101022" (adjacent same digit
+//pairs are 00 and 22), and "1101234883" (adjacent same digit pairs are 11 and 88).
+//Return the length of the longest semi-repetitive substring of s.
+
+//approach-1
+
+function longestSemiRepetitiveSubstring(s) {
+  let maxLength = 0;
+  let start = 0; // Start of the current window
+  let countRepeat = 0; // To track consecutive repeating characters
+
+  for (let i = 1; i < s.length; i++) {
+    // If current character is the same as previous one
+    if (s[i] === s[i - 1]) {
+      countRepeat++;
+    }
+
+    // If we have more than one consecutive repeating pair, adjust the window
+    while (countRepeat > 1) {
+      if (s[start] === s[start + 1]) {
+        countRepeat--;
+      }
+      start++;
+    }
+
+    // Calculate the length of the current valid window
+    maxLength = Math.max(maxLength, i - start + 1);
+  }
+
+  return maxLength;
+}
+
+console.log(longestSemiRepetitiveSubstring("12234511345")); // Output: 5
