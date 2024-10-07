@@ -120,3 +120,35 @@ function findLongestSubstring(str) {
 
   return longest;
 }
+
+//QUETION-4
+
+//A string is good if there are no repeated characters.
+//Given a string s​​​​​, return the number of good substrings of length three in s​​​​​​.
+//Note that if there are multiple occurrences of the same substring, every occurrence should be counted.
+//A substring is a contiguous sequence of characters in a string.
+
+// approach-1 (O(n))
+
+function countGoodSubstrings(s) {
+  let count = 0;
+
+  // Loop through the string using a sliding window
+  for (let i = 0; i <= s.length - 3; i++) {
+    // Grab the three characters in the current window
+    let a = s[i],
+      b = s[i + 1],
+      c = s[i + 2];
+
+    // Check if all three characters are unique
+    if (a !== b && b !== c && a !== c) {
+      count++;
+    }
+  }
+
+  return count;
+}
+
+// Example usage:
+console.log(countGoodSubstrings("xyzzaz")); // Output: 1
+console.log(countGoodSubstrings("aababcabc")); // Output: 4
