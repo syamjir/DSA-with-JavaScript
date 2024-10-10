@@ -191,3 +191,48 @@ function longestSemiRepetitiveSubstring(s) {
 }
 
 console.log(longestSemiRepetitiveSubstring("12234511345")); // Output: 5
+
+//QUESTION-6
+
+//Given an array of integers nums and an integer k. A continuous subarray is called nice if there are k odd numbers on it.
+//Return the number of nice sub-arrays.
+
+//approach-1 (O(n))
+
+function numberOfSubarrays(nums, k) {
+  let left = 0;
+  let oddCount = 0;
+  let result = 0;
+
+  for (let right = 0; right < nums.length; right++) {
+    // If the current number is odd, increase the oddCount
+    if (nums[right] % 2 === 1) {
+      oddCount++;
+    }
+
+    // If the number of odd numbers is greater than k, shrink the window from the left
+    while (oddCount > k) {
+      if (nums[left] % 2 === 1) {
+        oddCount--;
+      }
+      left++;
+    }
+
+    // If oddCount is exactly k, count valid subarrays
+    if (oddCount === k) {
+      let temp = left;
+      let prefix = 0;
+
+      // Count how many even numbers are on the left (this gives us the number of valid subarrays)
+      while (temp < nums.length && nums[temp] % 2 === 0) {
+        prefix++;
+        temp++;
+      }
+
+      // Add the number of valid subarrays
+      result += prefix + 1;
+    }
+  }
+
+  return result;
+}
